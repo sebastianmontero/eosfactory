@@ -1,17 +1,20 @@
 from setuptools import setup
 
 def readme():
-    with open('README.rst') as f:
+    with open('README.md') as f:
         return f.read()
 
 setup(name='eosfactory',
-      version='2.1',
+      version='0.0.1',  # TODO: change that before merge!!!
       description='Python-based EOS smart-contract development & testing framework',
       long_description=readme(),
       classifiers=[
-        'Development Status :: 2.0 - Beta',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3 :: Only',
         'Topic :: Software Development :: Testing',
       ],
       keywords='EOSIO, smart contract unit testing',
