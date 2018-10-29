@@ -29,6 +29,9 @@ setup(
     include_package_data=True,
     install_requires=[
         'termcolor',
+        'coverage',
+        'nose',
+        'nose-exclude',
     ],
     zip_safe=False
 )
