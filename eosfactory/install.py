@@ -24,6 +24,7 @@ def install(wsl_root=None):
     while True:
         map = config.config_map()
         eosio_repository_dir = None
+        _eosio_repository_dir = None
 
         if config.eosio_repository_dir_[0] in map:
             eosio_repository_dir = map[config.eosio_repository_dir_[0]]
@@ -63,6 +64,7 @@ def install(wsl_root=None):
     while True:
         map = config.config_map()
         contract_workspace_dir = None
+        _contract_workspace_dir = None
 
         if config.contract_workspace_[0] in map:
             contract_workspace_dir = map[config.contract_workspace_[0]]
