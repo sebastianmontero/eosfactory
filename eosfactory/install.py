@@ -20,18 +20,20 @@ def install(wsl_root=None):
     current_path_color = "green"
     error_path_color = "red"
 
+    tested_current_eosio_path = False
     while True:
         map = config.config_map()
         eosio_repository_dir = None
 
         if config.eosio_repository_dir_[0] in map:
             eosio_repository_dir = map[config.eosio_repository_dir_[0]]
-            _eosio_repository_dir = tilde(input(utils.heredoc('''
-                Where is the EOSIO repository located on your machine?
-                The current location is:
-                {}
-                Input another existing directory path, or nothing to keep the current one:
-                ''').format(colored(eosio_repository_dir, current_path_color)) + "\n"))
+            if tested_current_eosio_path:
+                _eosio_repository_dir = tilde(input(utils.heredoc('''
+                    Where is the EOSIO repository located on your machine?
+                    The current location is:
+                    {}
+                    Input another existing directory path, or nothing to keep the current one:
+                    ''').format(colored(eosio_repository_dir, current_path_color)) + "\n"))
         else:
             _eosio_repository_dir = tilde(input(utils.heredoc('''
                 Where is the EOSIO repository located on your machine?
@@ -43,7 +45,7 @@ def install(wsl_root=None):
 
         ok = _eosio_repository_dir and os.path.exists(os.path.join(
                 _eosio_repository_dir, config.node_exe_[1][0]))
-
+        tested_current_eosio_path = True
         if ok:
             map = config.config_map()
             map[config.eosio_repository_dir_[0]] = _eosio_repository_dir
@@ -57,18 +59,20 @@ def install(wsl_root=None):
         doesn't seem to be correct! EOSIO executables are not detected there.
         ''').format(colored(_eosio_repository_dir, error_path_color)) + "\n")
 
+    tested_current_workspace_path = False
     while True:
         map = config.config_map()
         contract_workspace_dir = None
 
         if config.contract_workspace_[0] in map:
             contract_workspace_dir = map[config.contract_workspace_[0]]
-            _contract_workspace_dir = tilde(input(utils.heredoc('''
-                Where do you prefer to keep your smart-contract projects?
-                The current location is:
-                {}
-                Input another existing directory path, or nothing to keep the current one:
-                ''').format(colored(contract_workspace_dir, current_path_color)) + "\n"))
+            if tested_current_workspace_path:
+                _contract_workspace_dir = tilde(input(utils.heredoc('''
+                    Where do you prefer to keep your smart-contract projects?
+                    The current location is:
+                    {}
+                    Input another existing directory path, or nothing to keep the current one:
+                    ''').format(colored(contract_workspace_dir, current_path_color)) + "\n"))
         else:
             _contract_workspace_dir = tilde(input(utils.heredoc('''
                 Where do you prefer to keep your smart-contract projects?
@@ -85,7 +89,7 @@ def install(wsl_root=None):
             config.write_config_map(map)
             print()
             break
-        
+        tested_current_workspace_path = True
         print("\n" + utils.heredoc('''
         The path you entered:
         {}
